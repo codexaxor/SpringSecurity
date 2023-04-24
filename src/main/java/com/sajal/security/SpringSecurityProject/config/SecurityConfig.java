@@ -20,13 +20,13 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("admin")
+                .password(passwordEncoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
 
         UserDetails user1 = User.builder()
                 .username("sajal")
-                .password("sajal")
+                .password(passwordEncoder().encode("sajal"))
                 .roles("USER")
                 .build();
 
@@ -51,8 +51,8 @@ public class SecurityConfig {
 
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
