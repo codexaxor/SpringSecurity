@@ -19,6 +19,7 @@ import java.util.Optional;
 public class UserInfoService implements UserDetailsService {
     @Autowired
     private UserInfoRepository userInfoRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
