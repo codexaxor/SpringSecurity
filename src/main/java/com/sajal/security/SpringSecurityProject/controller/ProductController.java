@@ -1,7 +1,9 @@
 package com.sajal.security.SpringSecurityProject.controller;
 
 import com.sajal.security.SpringSecurityProject.dto.Product;
+import com.sajal.security.SpringSecurityProject.entity.UserInfo;
 import com.sajal.security.SpringSecurityProject.service.ProductService;
+import com.sajal.security.SpringSecurityProject.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ public class ProductController {
 
     @Autowired
     private ProductService service;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @GetMapping("/welcome")
     public String welcome() {
@@ -24,6 +28,12 @@ public class ProductController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Product> getAllTheProducts() {
         return service.getProducts();
+    }
+
+    @PostMapping("/new")
+    public String addNewUser(@RequestBody UserInfo userInfo) {
+        userInfoService.addUser(userInfo);
+        return "User added successfully";
     }
 
     @GetMapping("/{id}")
