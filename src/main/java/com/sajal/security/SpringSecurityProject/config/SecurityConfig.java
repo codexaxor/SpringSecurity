@@ -1,5 +1,6 @@
 package com.sajal.security.SpringSecurityProject.config;
 
+import com.sajal.security.SpringSecurityProject.service.UserInfoService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -20,19 +21,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails user1 = User.builder()
-                .username("sajal")
-                .password(passwordEncoder().encode("sajal"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user1);
+        return new UserInfoService();
     }
 
     @Bean
